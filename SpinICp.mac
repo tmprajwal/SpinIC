@@ -1,0 +1,17 @@
+#
+#
+#/testem/det/setField 0. tesla
+#
+#/process/inactivate msc
+#/process/inactivate eIoni
+#/process/inactivate eBrem
+#/process/inactivate annihil
+#/process/inactivate phot
+#/process/inactivate compt
+#/process/inactivate conv
+#
+#/XTRdetector/setup alice06
+#/control/execute alice06.mac
+### Clear old sources
+/run/beamOn 10
+/control/shell sleep 5

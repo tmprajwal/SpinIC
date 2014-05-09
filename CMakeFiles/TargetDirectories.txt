@@ -1,0 +1,1 @@
+/home/prajwal/geant4_workdir/SpinIC_p10/CMakeFiles/spinIC.dir

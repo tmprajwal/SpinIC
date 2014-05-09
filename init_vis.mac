@@ -1,0 +1,24 @@
+# Macro file for the initialization phase of example B1
+# when running in interactive mode with visualization
+#
+# Set some default verbose
+#
+/control/verbose 2
+/control/saveHistory
+/run/verbose 2
+
+# Visualization setting
+#/control/execute vis.mac
+
+#Pulsed Beam
+#/tracking/storeTrajectory 1
+#/physics_engine/tailor/SyncRadiation on
+#/gps/source/clear
+#/gps/source/add 1.
+#/gps/particle e-
+#/gps/direction 0. 0. 1.
+#/gps/energy 12. GeV
+#/gps/position 0. 0. -9.5 m
+#/control/loop SpinICp.mac pulsed 1 1 1
+#Continuous Beam
+/control/execute SpinIC.mac

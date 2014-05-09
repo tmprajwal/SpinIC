@@ -1,0 +1,13 @@
+/run/verbose 2
+/control/execute SpinIC.mac
+/tracking/storeTrajectory 1
+/physics_engine/tailor/SyncRadiation on
+/gps/source/clear
+/vis/viewer/set/viewpointThetaPhi 90. 90.
+/gps/source/add 1.
+/gps/particle e-
+/gps/direction 0. 0. 1.
+/gps/energy 11. GeV
+/gps/position 0. 0. -9.5 m
+/gps/number 1
+/run/beamOn 125000

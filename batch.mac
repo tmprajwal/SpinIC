@@ -1,0 +1,8 @@
+/control/execute SpinIC.mac
+
+/SpinIC/run/setFileName SpinICTest_1M_Polarized
+/gps/polarization 0. 0. 1.
+/run/beamOn 1000000
+
+#/SpinIC/run/setFileName SpinICTest
+#/run/beamOn 100
