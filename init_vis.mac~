@@ -21,4 +21,4 @@
 #/gps/position 0. 0. -9.5 m
 #/control/loop SpinICp.mac pulsed 1 1 1
 #Continuous Beam
-/control/execute SpinIC_copy.mac
+/control/execute SpinIC.mac

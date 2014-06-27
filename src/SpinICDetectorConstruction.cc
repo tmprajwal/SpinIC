@@ -47,7 +47,7 @@ G4VPhysicalVolume* SpinICDetectorConstruction::Construct()
 
     // World    
     G4double worldSizeXY = 2.*m;
-    G4double worldSizeZ = 20.*m;
+    G4double worldSizeZ = 40.*m;
     G4Material* worldMaterial = G4Material::GetMaterial("G4_Galactic");
     
     G4VSolid* solidWorld
@@ -98,22 +98,27 @@ void SpinICDetectorConstruction::DefineMagnets()
 	// ****** Magnets: 1 - 3 ******
 
     // Strength of field
-    G4double stdfield = 4.0*tesla;
+    G4double stdfield = 0.22*tesla;
 
     // Magnet Geometry Parameters
     G4double magnetPlateThickness = 5.*cm;
     G4double magnetPlateSeparation = 10.*cm;
-    G4double magnetXSize = 10.*cm;
-    G4double magnetSmallZsize = 10.*cm;
-    G4double magnetLargeZsize = 2.*magnetSmallZsize;
+    G4double magnetXSize = 30.*cm;
+    G4double magnetSmallZsize = 1.5*m;
+    G4double magnetLargeZsize = magnetSmallZsize;
     
     // Magnet Positions
-    G4double magnet1ZPos = -5.05*m;
-    G4double magnet2ZPos = -6.7*m;
-    G4double magnet3ZPos = -8.35*m;
+    G4double magnet1ZPos = -5*m - (magnetSmallZsize/2);
+    G4double magnet2ZPos = magnet1ZPos - (20.*cm) - magnetSmallZsize;
+    G4double magnet3ZPos = magnet2ZPos - (20.*cm) - magnetSmallZsize;
+    G4double magnet4ZPos = magnet3ZPos - (20.*cm) - magnetSmallZsize;
+    G4double magnet5ZPos = magnet4ZPos - (20.*cm) - magnetSmallZsize;
+    G4double magnet6ZPos = magnet5ZPos - (20.*cm) - magnetSmallZsize;
+    G4double magnet7ZPos = magnet6ZPos - (20.*cm) - magnetSmallZsize;
+    G4double magnet8ZPos = magnet7ZPos - (20.*cm) - magnetSmallZsize;
     
     
-    // ****** 2 Small Magnets - Magnets 1&3 ******
+    // ****** Small (with fields up in Y) Magnets - Magnets 1,2,7,8******
     
     // Define small magnet outer volume as large block of iron
     G4Box* smallMagnetOuter
@@ -165,11 +170,11 @@ void SpinICDetectorConstruction::DefineMagnets()
 
 #endif
     
-    // 3rd magnet
+    // 2rd magnet
 
 #if 1
     new G4PVPlacement(0,                                // no rotation
-                      G4ThreeVector(0.,0.,magnet3ZPos), // position
+                      G4ThreeVector(0.,0.,magnet2ZPos), // position
                       logicalSmallMagnetOuter,  // its logical volume
                       "pv_Magnet3",             // its name
                       flogicalWorld,            // its mother volume
@@ -178,9 +183,29 @@ void SpinICDetectorConstruction::DefineMagnets()
                       fCheckOverlaps);          // checking overlaps
     
 #endif
+    // 7th magnet
+    new G4PVPlacement(0,                                // no rotation
+                      G4ThreeVector(0.,0.,magnet7ZPos), // position
+                      logicalSmallMagnetOuter,  // its logical volume
+                      "pv_Magnet3",             // its name
+                      flogicalWorld,            // its mother volume
+                      false,                    // no boolean operation
+                      0,                        // copy number
+                      fCheckOverlaps);          // checking overlaps
+    
+    // 8th magnet
+    new G4PVPlacement(0,                                // no rotation
+                      G4ThreeVector(0.,0.,magnet8ZPos), // position
+                      logicalSmallMagnetOuter,  // its logical volume
+                      "pv_Magnet3",             // its name
+                      flogicalWorld,            // its mother volume
+                      false,                    // no boolean operation
+                      0,                        // copy number
+                      fCheckOverlaps);          // checking overlaps
+        
 
 
-    // ****** Large Magnet - Magnet 2 ******
+    // ****** Large (Field down in Y) Magnet - Magnet 3,4,5,6 ******
     
     // Define large magnet outer volume as large block of iron
     G4Box* largeMagnetOuter
@@ -221,17 +246,49 @@ void SpinICDetectorConstruction::DefineMagnets()
     // Place Large magnet, this will include inner and outer
 
 #if 1
+    // 3th magnet
     new G4PVPlacement(0,                                // no rotation
-                      G4ThreeVector(0.,0.,magnet2ZPos), // position
+                      G4ThreeVector(0.,0.,magnet3ZPos), // position
                       logicalLargeMagnetOuter,          // its logical volume
                       "pv_Magnet2",             // its name
                       flogicalWorld,            // its mother volume
                       false,                    // no boolean operation
                       0,                        // copy number
                       fCheckOverlaps);          // checking overlaps
-
+                      
 #endif    
-    
+    // 4th magnet
+    new G4PVPlacement(0,                                // no rotation
+                      G4ThreeVector(0.,0.,magnet4ZPos), // position
+                      logicalLargeMagnetOuter,          // its logical volume
+                      "pv_Magnet2",             // its name
+                      flogicalWorld,            // its mother volume
+                      false,                    // no boolean operation
+                      0,                        // copy number
+                      fCheckOverlaps);          // checking overlaps
+                      
+                      
+    // 5th magnet
+    new G4PVPlacement(0,                                // no rotation
+                      G4ThreeVector(0.,0.,magnet5ZPos), // position
+                      logicalLargeMagnetOuter,          // its logical volume
+                      "pv_Magnet2",             // its name
+                      flogicalWorld,            // its mother volume
+                      false,                    // no boolean operation
+                      0,                        // copy number
+                      fCheckOverlaps);          // checking overlaps
+                      
+                      
+    // 6th magnet
+    new G4PVPlacement(0,                                // no rotation
+                      G4ThreeVector(0.,0.,magnet6ZPos), // position
+                      logicalLargeMagnetOuter,          // its logical volume
+                      "pv_Magnet2",             // its name
+                      flogicalWorld,            // its mother volume
+                      false,                    // no boolean operation
+                      0,                        // copy number
+                      fCheckOverlaps);          // checking overlaps
+                       
     // **** Magnetic Fields ****
     // Create magnetic fields and managers
 
@@ -283,7 +340,7 @@ void SpinICDetectorConstruction::DefineMagnets()
 	// |  |  |
 	// |  |  |
 
-	G4double collPlateX = magnetXSize;
+	G4double collPlateX = magnetXSize*3;
 	G4double collPlateY = (magnetPlateThickness*2.+magnetPlateSeparation);
 
 
@@ -293,8 +350,8 @@ void SpinICDetectorConstruction::DefineMagnets()
 	//*****! Main Collimators on Magnet faces !*****
 	
 	//!Attn: MANUAL INPUT
-	G4double collThetaAngle1 = 0.01;//Angle subtended by collimator to its serving magnet's center
-	G4double outerRadius = 0.5*mm;	   //radius of the beam hole
+	G4double collThetaAngle1 = 0.04;//Angle subtended by collimator to its serving magnet's center
+	G4double outerRadius = 2.0*cm;	   //radius of the beam hole
     G4double collPlateZ = 10.0*mm;	   //Collimator Thickness
 
 	// Hole for beam
@@ -313,7 +370,7 @@ void SpinICDetectorConstruction::DefineMagnets()
 
    G4LogicalVolume* logicalCollHole
     = new G4LogicalVolume(collHole,         // its solid
-                          magnetVacuum,               // its material
+                          magnetVacuum,     // its material
                           "l_coll_hole");   // its name
 
 	//##### MagnetNumber = 1, forward #####
@@ -346,7 +403,7 @@ void SpinICDetectorConstruction::DefineMagnets()
 	
 	
 	// Collimator Slits
-	G4double collSlitWm1f1 = 0.06125*cm;	   //slit width of the collimator
+	G4double collSlitWm1f1 = (16.*0.06125)*cm;	   //slit width of the collimator
 
     G4Box* collSlitm1f1 
     = new G4Box("coll_block_m1f1",              // its name
@@ -359,7 +416,7 @@ void SpinICDetectorConstruction::DefineMagnets()
                            magnetVacuum,               // its material
                            "l_coll_slit_m1f1");   // its name
 
-	G4double collSlitWm1f2 = 0.125*cm;	   //slit width of the collimator
+	G4double collSlitWm1f2 = (16.*0.125)*cm;	   //slit width of the collimator
 
     G4Box* collSlitm1f2 
     = new G4Box("coll_block_m1f2",              // its name
@@ -395,7 +452,7 @@ void SpinICDetectorConstruction::DefineMagnets()
 
 	//MagnetNumber = 1, forward: Placement
 
-
+#if 1
 	new G4PVPlacement(0,                        // no rotation
                       G4ThreeVector(0.,0.,magnet1ZPos+((magnetSmallZsize/2)+(collPlateZ/2))),
                       logicalCollBlockm1f,  // its logical volume
@@ -404,6 +461,7 @@ void SpinICDetectorConstruction::DefineMagnets()
                       false,                    // no boolean operation
                       0,                        // copy number
                       fCheckOverlaps);          // checking overlaps
+#endif
 
 #if 0
  	//##### MagnetNumber = 1, Backward #####
@@ -721,7 +779,7 @@ void SpinICDetectorConstruction::DefineIC()
 	// Define the IC geometry here
 	
 	//IC Geometry Parameters
-	G4double icXYsize = 12.*cm;
+	G4double icXYsize = 40.*cm;
 	G4double icZsize = 1.0*m;
 	G4double icShellThick = 1.*mm;
 	G4double icWinXYsize = icXYsize - 2.*cm;

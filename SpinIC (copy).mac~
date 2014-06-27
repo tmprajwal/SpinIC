@@ -43,10 +43,8 @@
 /gps/source/add 1.
 /gps/particle e-
 /gps/direction 0. 0. 1.
-/gps/energy 5. GeV
+/gps/energy 11. GeV
 /gps/position 0. 0. -19.5 m
 
-/gps/number 1
-#/gps/number 125000
-
-/run/beamOn 100000
+#/gps/number 1
+/gps/number 12500

@@ -1,0 +1,13 @@
+/vis/open OGL
+/vis/drawVolume
+/vis/scene/add/trajectories
+/vis/scene/add/hits
+/vis/viewer/set/viewpointThetaPhi 90. 0.
+/physics_engine/tailor/SyncRadiation on
+/gps/source/add 1.
+/gps/particle e-
+/gps/direction 0. 0. 1.
+/gps/energy 12. GeV
+/gps/position 0. 0. -19.5 m
+/gps/number 1
+/run/beamOn 1
